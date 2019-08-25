@@ -1,3 +1,4 @@
+{% load staticfiles%}
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
@@ -7,3 +8,5 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+<script type="text/javascript" src="{% static 'js/vue.js'%}"></script>
