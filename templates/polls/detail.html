@@ -1,8 +1,26 @@
 {% load staticfiles%}
-<h1>{{ question.question_text }}</h1>
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
-{% endfor %}
-</ul>
+  <link rel="stylesheet" href="{% static 'css/element.css' %}">
+  {% verbatim %}
+  <div id="app">
+      <h1>{{ question.question_text }}</h1>
+      <ul>
+          <li v-for="choice in choice_list">{{ choice.choice_text }}</li>
+      </ul>
+  </div>
+{% endverbatim %}
 <script type="text/javascript" src="{% static 'js/vue.js'%}"></script>
+<script src="{% static 'js/element.js'%}"></script>
+<script src="{% static 'js/jquery-3.2.1.js'%}"></script>
+<script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+<script>
+  new Vue({
+      el: '#app',
+      data: {
+        choice_list: {{choice_list|safe}},
+        question: {{question|safe}}
+      },
+      methods: {
+
+      }
+    })
+</script>

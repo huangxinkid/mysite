@@ -7,19 +7,30 @@
 </head>
 <body>
   <div id="app">
-    <el-button @click="visible = true">Button</el-button>
-    <el-dialog :visible.sync="visible" title="Hello world">
-      <p>Try Element</p>
-    </el-dialog>
+    <div>
+        <el-button @click="visible = true">Button</el-button>
+        <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+        </el-dialog>
+    </div>
+    <div id="graph-container">
+
+    </div>
+
   </div>
 </body>
 <script src="../static/js/vue.js"></script>
 <script src="../static/js/element.js"></script>
+<script src="../static/js/jquery-3.2.1.js"></script>
+<script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
 <script>
   new Vue({
       el: '#app',
-      data: function() {
-        return { visible: false }
+      data: {
+        visible: false
+      },
+      methods: {
+
       }
     })
 </script>

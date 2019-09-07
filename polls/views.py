@@ -1,7 +1,10 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from django.forms.models import model_to_dict
 
-from .models import Question
+from .models import Question, Choice
 
 
 def index(request):
@@ -12,11 +15,13 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
-    return render(request, 'polls/detail.html', {'question': question})
+
+    question = Question.objects.get(pk=question_id)
+    question.pub_date =  question.pub_date.strftime('%Y-%m-%d %H:%M:%S')
+    question_dic = model_to_dict(question)
+    choice_qs = Choice.objects.filter(question=question).all()
+    choice_list = [model_to_dict(obj) for obj in choice_qs]
+    return render(request, 'polls/detail.html', {'question': json.dumps(question_dic), 'choice_list': json.dumps(choice_list)})
 
 def results(request, question_id):
     response = "You're looking at the results of question %s."
