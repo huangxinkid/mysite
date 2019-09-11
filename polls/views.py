@@ -3,8 +3,11 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.forms.models import model_to_dict
+from rest_framework import viewsets
+from rest_framework.response import Response
 
 from .models import Question, Choice
+from .serializers import QuestionS, ChoiceS
 
 
 def index(request):
@@ -29,3 +32,16 @@ def results(request, question_id):
 
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
+
+
+class QuestionV(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionS
+
+
+class ChoiceV(viewsets.ModelViewSet):
+    queryset = Choice.objects.all()
+    serializer_class = ChoiceS
+
+
+
