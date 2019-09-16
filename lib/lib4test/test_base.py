@@ -15,12 +15,13 @@ class TestBase:
         self.client = clinet
         self.testcase = testcase
 
-    def get(self, url, data=None, status_code=status.HTTP_200_OK):
+    def get(self, url, data=None, status_code=status.HTTP_200_OK, formamt='json'):
         r = self.client.get(url, data=data)
         self.testcase.assertEqual(r.status_code, status_code)
         return r.data
 
-    def post(self, url, data=None, status_code= status.HTTP_201_CREATED):
+    def post(self, url, data=None, status_code= status.HTTP_201_CREATED, format='json'):
+        # if there is file upload, the format is 'multipart'
         r = self.client.post(url, data=data)
         self.testcase.assertEqual(r.status_code, status_code)
         return r.data

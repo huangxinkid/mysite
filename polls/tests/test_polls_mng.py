@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from polls.tests.lib.polls_request import  PollsRequest
+from .lib.polls_request import PollsRequest
 
 class PollsMng(TestCase):
     def setUp(self):
