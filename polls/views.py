@@ -42,6 +42,3 @@ class QuestionV(viewsets.ModelViewSet):
 class ChoiceV(viewsets.ModelViewSet):
     queryset = Choice.objects.all()
     serializer_class = ChoiceS
-
-
-
