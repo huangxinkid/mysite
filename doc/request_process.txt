@@ -1,0 +1,18 @@
+python manage.py runserver -> 
+execute_from_command_line(sys.argv) -> 
+ManagementUtility 类的 execute()方法 -> 
+ManagementUtility 类的 fetch_command(subcommand).run_from_argv(self.argv) ->
+django/contrib/staticfiles/management/commands/runserver.py 的 Command 类 -> 
+django/core/management/base.py BaseCommand 类的 run_from_argv() 方法 -> 
+django/core/management/base.py BaseCommand 类的 excute() 方法 ->
+django/core/management/commands/runserver.py Command 类的 handle() 方法 ->
+django/core/management/commands/runserver.py Command 类的 run() 方法 ->
+django/core/management/commands/runserver.py Command 类的 inner_run() 方法 ->
+django/core/servers/basehttp.py run(addr, port, wsgi_handler, ipv6=False, threading=False, server_cls=WSGIServer) 方法 ->
+WSGIServer 的 serve_forever() 开始接收请求 ->
+WSGIServer 的 _handle_request_noblock() ->
+WSGIServer 的 process_request() ->
+WSGIServer 的 finish_request() ->
+在 inish_request() 中其实会调用 wsgi_handler(request, client_address, WSGIServer) -> 
+wsgi_handler 其实是 django/core/servers/basehttp 的 WSGIRequestHandler 类 ->
+socketserver.py 的 BaseRequestHandler 对http解包过程会调用子类 WSGIRequestHandler 的handle() ->
