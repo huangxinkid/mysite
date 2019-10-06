@@ -13,6 +13,7 @@ WSGIServer 的 serve_forever() 开始接收请求 ->
 WSGIServer 的 _handle_request_noblock() ->
 WSGIServer 的 process_request() ->
 WSGIServer 的 finish_request() ->
-在 inish_request() 中其实会调用 wsgi_handler(request, client_address, WSGIServer) -> 
-wsgi_handler 其实是 django/core/servers/basehttp 的 WSGIRequestHandler 类 ->
-socketserver.py 的 BaseRequestHandler 对http解包过程会调用子类 WSGIRequestHandler 的handle() ->
+在 finish_request() 中其实会调用 django/core/servers/basehttp 的 WSGIRequestHandler(request, client_address, WSGIServer) -> 
+父类 BaseRequestHandler 对http解包过程会调用子类 WSGIRequestHandler 的 handle() 方法->
+在 handle() 中 handler = ServerHandler()  handler.run(self.server.get_app())，这里的self.server 就是 WSGIServer，而在11行 run（）方法中 httpd.set_app(wsgi_handler)，即给 WSGIServer  set_app 为 WSGIHandler() 对象
+所以最终，handler.run(self.server.get_app()) 运行的就是 WSGIHandler 的 __call__ 方法
