@@ -17,3 +17,15 @@ WSGIServer 的 finish_request() ->
 父类 BaseRequestHandler 对http解包过程会调用子类 WSGIRequestHandler 的 handle() 方法->
 在 handle() 中 handler = ServerHandler()  handler.run(self.server.get_app())，这里的self.server 就是 WSGIServer，而在11行 run（）方法中 httpd.set_app(wsgi_handler)，即给 WSGIServer  set_app 为 WSGIHandler() 对象
 所以最终，handler.run(self.server.get_app()) 运行的就是 WSGIHandler 的 __call__ 方法
+
+1 runserver.py的handle函数 -> self.run() -> self.inner_run() -> basehttp.py run() ->
+WSGIServer.server_forever() -> WSGIServer._handle_request_noblock()
+这一段走完了socket流程，也就是对应生产环境的Nginx的功能
+
+2 self.process_request() -> finish_request() -> WSGIRequestHandler.init() ->
+WSGIRequestHandler.setup(), WSGIRequestHandler.handle() -> 
+SimpleHandler.init()(将stdin, stdout初始化成socket文件)
+这一段完成生产环境中的uwsgi服务的功能，接受socket中的消息
+
+3、ServerHandler.run() -> application(self.environ, self.start_response) , self.finish_response()
+真正调用Django框架处理请求
