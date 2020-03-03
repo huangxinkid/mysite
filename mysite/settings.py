@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'polls',
+    'public_app'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'mysite.middleware.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
