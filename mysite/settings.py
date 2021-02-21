@@ -85,10 +85,10 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'NAME': 'django_mysql', # 数据库名
+        'NAME': 'mysite_db', # 数据库名
         'USER': 'root', # 账号
-        'PASSWORD': 'root', # 密码
-        'HOST': '127.0.0.1', # HOST
+        'PASSWORD': '123456', # 密码
+        'HOST': 'mysql.local', # HOST
         'POST': 3306, # 端口
     }
 }
