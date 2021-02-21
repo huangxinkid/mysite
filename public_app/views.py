@@ -1,7 +1,7 @@
 from rest_framework import status, exceptions
 from rest_framework.views import APIView
-from rest_framework.reponse import Response
-from djano.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from rest_framework.response import Response
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 
 class UserLoginV(APIView):
@@ -27,7 +27,7 @@ class UserLogoutV(APIView):
         return Response(None, status=status.HTTP_200_OK)
 
 
-class UserInfo(APIView):
+class UserInfoV(APIView):
     permission_class = []
 
     def get(self, request):
